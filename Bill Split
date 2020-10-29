@@ -1,0 +1,77 @@
+#include<iostream>
+#include<string> 
+using namespace std;
+int main(){
+	int n;
+	string name[10]={"0"};
+	int expenditure[10][10]={0};
+	cin>>n;
+	for(int i=0;i<n;i++){
+		cin>>name[i];
+	}
+	string who;
+	while(cin>>who&&!cin.eof()){
+		string what;
+		cin>>what;
+		if(what=="ALL"){
+			int a;
+			cin>>a;
+			for(int i=0;i<n;i++){
+				expenditure[i][i]+=a/n;
+			}
+		}else{
+			int list;
+			for(int k=0;k<n;k++){
+				if(name[k]==who){
+					list=k;
+					break;
+				}
+			}
+			int Howmanypeoplepayfor;
+			int money;
+			Howmanypeoplepayfor=what[0]-'0';
+			cin>>money;
+			int list1;
+			string people;
+			for(int i=1;i<=Howmanypeoplepayfor;i++){
+				cin>>people;
+				
+				for(int j=0;j<10;j++){
+				if(people==name[j]){
+					people=name[j];
+					list1=j;
+					expenditure[j][j]+=money/(Howmanypeoplepayfor+1);
+					expenditure[j][list]+=money/(Howmanypeoplepayfor+1);
+					break;
+				}
+			}
+			}
+		}
+		for(int i=0;i<10;i++){
+			for(int j=0;j<10;j++){
+				if(i==j){
+					continue;
+				}if(expenditure[i][j]>=expenditure[j][i]){
+					expenditure[j][i]=0;
+					expenditure[i][j]-=expenditure[j][i];
+				}
+			}
+		}
+		
+			
+		}
+	for(int i=0;i<10;i++){
+	cout<<name[i]<<" ";
+		for(int j=0;j<10;j++){
+			if(expenditure[i][j]!=0){
+				cout<<name[j]<<" ";
+				cout<<expenditure[i][j]<<" ";
+			}
+		}
+		cout<<expenditure[i][i]<<"\n";
+	}
+	 
+	
+	return 0;
+} 
+
